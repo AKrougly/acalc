@@ -1,2 +1,2 @@
 # acalc
-Calculator Android Studuo
+Calculator Android Studio

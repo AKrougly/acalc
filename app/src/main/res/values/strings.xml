@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">ACalc</string>
+    <string name="button_calculator">Calculator</string>
+    <string name="button_back">Back</string>
+    <string name="memory_read">MR</string>
+    <string name="memory_clear">MC</string>
+    <string name="memory_add">M+</string>
+    <string name="memory_subtract">M-</string>
+    <string name="clear">C</string>
+    <string name="switch_sign">&#0177;</string>
+    <string name="percent">&#0037;</string>
+    <string name="divide">&#0247;</string>
+    <string name="multiply">&#0215;</string>
+    <string name="subtract">&#8722;</string>
+    <string name="add">&#43;</string>
+    <string name="equal">&#61;</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="comma">,</string>
+    <string name="backspace">\u232B</string>
+    <string name="append_input_display">%1$s%2$s</string>
+</resources>
