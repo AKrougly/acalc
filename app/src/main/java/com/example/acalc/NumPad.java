@@ -45,6 +45,7 @@ public final class NumPad {
     static char CR  = (char) 0x0D; /* \r \u000d: carriage return CR */
     CalculatorActivity calculatorActivity;
     InputDisplay inputDisplay;
+    Subtotal subtotal;
     Key KEY_EQUAL = new Key("button_key_equal", Character.toString(inputDisplay.CHAR_EQUAL), KeyEvent.KEYCODE_EQUALS, KeyType.OPERATOR, KeyMeaning.EQUAL);
     Key KEY_BACKSPACE = new Key("button_key_backspace", "BackSpace", KeyEvent.KEYCODE_DEL, KeyType.COMMAND, KeyMeaning.BACKSPACE);
     KeyEvent lastKeyEvent;
@@ -83,6 +84,7 @@ public final class NumPad {
     NumPad(CalculatorActivity calculatorActivity) {
         this.calculatorActivity = calculatorActivity;
         this.inputDisplay = new InputDisplay(calculatorActivity);
+        this.subtotal = new Subtotal();
         inputDisplay.clearHistory();
         lastKey = KEY_EQUAL;
 
@@ -180,6 +182,43 @@ public final class NumPad {
             keyHandler(KEY_BACKSPACE);
         inputDisplay.setOp(key);
     }
+    void keyMemoryClearHandler() {
+        subtotal.clearSubtotal();
+    }
+    void keyMemoryReadHandler() {
+        inputDisplay.setText(subtotal.readSubtotal());
+    }
+    void keyMemoryAddHandler() {
+        subtotal.setSubtotal(
+            inputDisplay.calcExpr(subtotal.readSubtotal(), inputDisplay.getText(), inputDisplay.CHAR_PLUS)
+        );
+    }
+    void keyMemorySubtractHandler() {
+        subtotal.setSubtotal(
+            inputDisplay.calcExpr(subtotal.readSubtotal(), inputDisplay.getText(), inputDisplay.CHAR_MINUS)
+        );
+    }
+    void keyTypeMemoryHandler(Key key) {
+        Key lk = lastKey;
+        switch (key.keyMeaning) {
+            case MEMORY_CLEAR:
+                keyMemoryClearHandler();
+                break;
+            case MEMORY_READ:
+                keyMemoryReadHandler();
+                break;
+            case MEMORY_ADD:
+                keyMemoryAddHandler();
+                break;
+            case MEMORY_SUBTRACT:
+                keyMemorySubtractHandler();
+                break;
+            default:
+                //throw new IllegalStateException("Invalid keyType: "+ key.keyType);
+                break;
+        }
+        lastKey = lk;
+    }
     void keyHandler(Key key) {
         if (key != null) {
             switch (key.keyType) {
@@ -191,6 +230,9 @@ public final class NumPad {
                     break;
                 case COMMAND:
                     keyTypeCommandHandler(key);
+                    break;
+                case MEMORY:
+                    keyTypeMemoryHandler(key);
                     break;
                 default:
                     //throw new IllegalStateException("Invalid keyType: "+ key.keyType);

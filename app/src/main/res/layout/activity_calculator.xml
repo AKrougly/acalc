@@ -76,10 +76,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/memory_button"
                 android:gravity="center"
                 android:text="@string/memory_read"
-                android:textColor="@color/white"
+                android:textColor="@color/memory_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -89,10 +89,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/memory_button"
                 android:gravity="center"
                 android:text="@string/memory_clear"
-                android:textColor="@color/white"
+                android:textColor="@color/memory_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -102,10 +102,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/memory_button"
                 android:gravity="center"
                 android:text="@string/memory_add"
-                android:textColor="@color/white"
+                android:textColor="@color/memory_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -115,10 +115,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/memory_button"
                 android:gravity="center"
                 android:text="@string/memory_subtract"
-                android:textColor="@color/white"
+                android:textColor="@color/memory_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -135,10 +135,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/clear_button"
                 android:gravity="center"
                 android:text="@string/clear"
-                android:textColor="@color/white"
+                android:textColor="@color/clear_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -161,10 +161,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/operator_button"
                 android:gravity="center"
                 android:text="@string/percent"
-                android:textColor="@color/white"
+                android:textColor="@color/operator_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -174,10 +174,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/operator_button"
                 android:gravity="center"
                 android:text="@string/divide"
-                android:textColor="@color/white"
+                android:textColor="@color/operator_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -233,10 +233,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/operator_button"
                 android:gravity="center"
                 android:text="@string/multiply"
-                android:textColor="@color/white"
+                android:textColor="@color/operator_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -292,10 +292,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/operator_button"
                 android:gravity="center"
                 android:text="@string/subtract"
-                android:textColor="@color/white"
+                android:textColor="@color/operator_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -351,10 +351,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/operator_button"
                 android:gravity="center"
                 android:text="@string/add"
-                android:textColor="@color/white"
+                android:textColor="@color/operator_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -411,10 +411,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/equal_button"
                 android:gravity="center"
                 android:text="@string/equal"
-                android:textColor="@color/white"
+                android:textColor="@color/equal_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 

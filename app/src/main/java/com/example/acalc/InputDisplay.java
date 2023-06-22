@@ -111,38 +111,39 @@ public final class InputDisplay {
         }
         return text.substring(beginIndex, endIndex);
     }
-    void calculateExpression(double n1, double n2, char op) {
-        try {
-            double res = 0.0;
-            switch (op) {
-                case CHAR_PLUS: res = n1 + n2;
-                    break;
-                case CHAR_MINUS: res = n1 - n2;
-                    break;
-                case CHAR_STAR: res = n1 * n2;
-                    break;
-                case CHAR_SLASH: res = n1 / (n2 == 0 ? 1 : n2);
-                    break;
-            }
-            clearAll();
-            setText(rightTrim(rightTrim(double2str(res), "0"), DECIMAL_SEPARATOR + ""));
-        } catch (Exception e) {
-            clearAll();
-            clearHistory();
-        }
-    }
-    void executeOp() {
+    String calculateExpression(double n1, double n2, char op) {
         /* DecimalFormat df = new DecimalFormat();
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator(DECIMAL_SEPARATOR);
         symbols.setGroupingSeparator(GROUPING_SEPARATOR);
         df.setDecimalFormatSymbols(symbols); */
+        //Number n1 = df.parse(str1);
+        //Number n2 = df.parse(str2);
+        double res = 0.0;
+        switch (op) {
+            case CHAR_PLUS: res = n1 + n2;
+                break;
+            case CHAR_MINUS: res = n1 - n2;
+                break;
+            case CHAR_STAR: res = n1 * n2;
+                break;
+            case CHAR_SLASH: res = n1 / (n2 == 0 ? 1 : n2);
+                break;
+        }
+        return rightTrim(rightTrim(double2str(res), "0"), DECIMAL_SEPARATOR + "");
+    }
+    String calcExpr(String str1, String str2, char op) {
         try {
-            //Number n1 = df.parse(str1);
-            //Number n2 = df.parse(str2);
-            double n1 = str2double(str1);
-            double n2 = str2double(str2);
-            calculateExpression(n1, n2, op);
+            return calculateExpression(str2double(str1), str2double(str2), op);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    void executeOp() {
+        try {
+            String res = calcExpr(str1, str2, op);
+            clearAll();
+            setText(res);
         } catch (Exception e) {
             clearAll();
             clearHistory();
@@ -151,8 +152,9 @@ public final class InputDisplay {
     void executeOpPercent() {
         try {
             double n1 = str2double(str1);
-            double n2 = str2double(str2);
-            calculateExpression(n1, n1 * n2 / 100.0, op);
+            String res = calculateExpression(n1, n1 * str2double(str2) / 100.0, op);
+            clearAll();
+            setText(res);
         } catch (Exception e) {
             clearAll();
             clearHistory();
