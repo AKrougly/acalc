@@ -148,10 +148,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/switch_sign"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -194,10 +194,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/seven"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -207,10 +207,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/eight"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -220,10 +220,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/nine"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -253,10 +253,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/four"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -266,10 +266,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/five"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -279,10 +279,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/six"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -312,10 +312,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/one"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -325,10 +325,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/two"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -338,10 +338,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/three"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -372,10 +372,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/zero"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -385,10 +385,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_key"
+                android:background="@drawable/numeric_button"
                 android:gravity="center"
                 android:text="@string/comma"
-                android:textColor="@color/white"
+                android:textColor="@color/numeric_button_text_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 

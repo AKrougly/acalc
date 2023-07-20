@@ -5,6 +5,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -129,7 +131,7 @@ public final class NumPad {
     void keySwitchSignHandler() {
         inputDisplay.appendMinusSign();
     }
-    void keyTypeCommandHandler(Key key) {
+    void keyTypeCommandHandler(@NonNull Key key) {
         switch (key.keyMeaning) {
             case CLEAR:
                 keyClearHandler();
@@ -145,20 +147,11 @@ public final class NumPad {
                 break;
         }
     }
-    void keyDigitHandler(Key key) {
-        if (key.getChar() != inputDisplay.CHAR_ZERO ||
-            !inputDisplay.getText().equals("" + inputDisplay.CHAR_ZERO) &&
-            !inputDisplay.getText().equals("" + inputDisplay.CHAR_MINUS + inputDisplay.CHAR_ZERO)
-        ) {
-            inputDisplay.appendCh(key.getChar());
-        }
+    void keyDigitHandler(@NonNull Key key) {
+        inputDisplay.appendDigit(key.getChar());
     }
     void keyCommaHandler(Key key) {
-        if (!inputDisplay.getText().contains("" + inputDisplay.CHAR_COMMA)) {
-            if (inputDisplay.isEmpty(inputDisplay.getText()))
-                inputDisplay.appendCh(inputDisplay.CHAR_ZERO);
-            inputDisplay.appendCh(inputDisplay.CHAR_COMMA);
-        }
+        inputDisplay.appendComma();
     }
     void keyTypeNumberHandler(Key key) {
         if (lastKey.keyMeaning == KeyMeaning.EQUAL || lastKey.keyMeaning == KeyMeaning.OPERATOR_PERCENT) {
@@ -178,8 +171,6 @@ public final class NumPad {
         }
     }
     void keyTypeOperatorHandler(Key key) {
-        if (inputDisplay.getLastChar() == inputDisplay.CHAR_COMMA)
-            keyHandler(KEY_BACKSPACE);
         inputDisplay.setOp(key);
     }
     void keyMemoryClearHandler() {
@@ -190,15 +181,15 @@ public final class NumPad {
     }
     void keyMemoryAddHandler() {
         subtotal.setSubtotal(
-            inputDisplay.calcExpr(subtotal.readSubtotal(), inputDisplay.getText(), inputDisplay.CHAR_PLUS)
+            Expression.calcOp(subtotal.readSubtotal(), inputDisplay.getText(), inputDisplay.CHAR_PLUS)
         );
     }
     void keyMemorySubtractHandler() {
         subtotal.setSubtotal(
-            inputDisplay.calcExpr(subtotal.readSubtotal(), inputDisplay.getText(), inputDisplay.CHAR_MINUS)
+            Expression.calcOp(subtotal.readSubtotal(), inputDisplay.getText(), inputDisplay.CHAR_MINUS)
         );
     }
-    void keyTypeMemoryHandler(Key key) {
+    void keyTypeMemoryHandler(@NonNull Key key) {
         Key lk = lastKey;
         switch (key.keyMeaning) {
             case MEMORY_CLEAR:
@@ -241,7 +232,7 @@ public final class NumPad {
             lastKey = key;
         }
     }
-    public void keyEventHandler(KeyEvent event) {
+    public void keyEventHandler(@NonNull KeyEvent event) {
         int keyCode = event.getKeyCode();
         if (lastKeyEvent != null) {
             if (lastKeyEvent.getKeyCode() == KeyEvent.KEYCODE_SHIFT_LEFT) {

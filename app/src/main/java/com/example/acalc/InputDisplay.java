@@ -1,15 +1,10 @@
 package com.example.acalc;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Locale;
-
 public final class InputDisplay {
     static char CR  = (char) 0x0D; /* \r \u000d: carriage return CR */
     /*final static char LF  = (char) 0x0A; /* \n \u000a: linefeed LF */
     static final char DECIMAL_SEPARATOR = '.';
-    static final char GROUPING_SEPARATOR = ',';
+    //static final char GROUPING_SEPARATOR = ',';
     static final char CHAR_ZERO = '0';
     static final char CHAR_EQUAL = '=';
     static final char CHAR_SLASH = '/';
@@ -27,26 +22,26 @@ public final class InputDisplay {
         historyDisplay = new HistoryDisplay(calculatorActivity);
         clearAll();
     }
-    boolean isEmpty(String str) {
+    static boolean isEmpty(String str) {
         return ((str == null) || (str.length() == 0));
     }
-    boolean isNotEmpty(String str) {
+    static boolean isNotEmpty(String str) {
         return !isEmpty(str);
-    }
-    void displayText() {
-        calculatorActivity.setInputDisplayText(op == CHAR_EQUAL ? str1 : str2);
-    }
-    void clearAll() {
-        op = CHAR_EQUAL;
-        str1 = "";
-        str2 = "";
-        displayText();
     }
     String getText() {
         if (op == CHAR_EQUAL)
             return str1;
         else
             return str2;
+    }
+    void displayText() {
+        calculatorActivity.setInputDisplayText(getText());
+    }
+    void clearAll() {
+        op = CHAR_EQUAL;
+        str1 = "";
+        str2 = "";
+        displayText();
     }
     char getStringLastChar(String str) {
         if (isNotEmpty(str))
@@ -62,19 +57,31 @@ public final class InputDisplay {
             return getStringLastChar(str1);
         return CHAR_EQUAL;
     }
-    void appendCh(char ch) {
+    void setText(String text) {
+        String str = text.substring(0, Math.min(text.length(), 24));
         if (op == CHAR_EQUAL)
-            str1 += ch;
+            str1 = str;
         else
-            str2 += ch;
+            str2 = str;
         displayText();
     }
-    void setText(String text) {
-        if (op == CHAR_EQUAL)
-            str1 = text;
-        else
-            str2 = text;
-        displayText();
+    void appendCh(char ch) {
+        setText(getText() + ch);
+    }
+    void appendDigit(char ch) {
+        if (ch != CHAR_ZERO ||
+            !getText().equals("" + CHAR_ZERO) &&
+            !getText().equals("" + CHAR_MINUS + CHAR_ZERO)
+        ) {
+            appendCh(ch);
+        }
+    }
+    void appendComma() {
+        if (!getText().contains("" + CHAR_COMMA)) {
+            if (isEmpty(getText()))
+                appendCh(CHAR_ZERO);
+            appendCh(CHAR_COMMA);
+        }
     }
     void appendMinusSign() {
         String str = getText();
@@ -89,59 +96,9 @@ public final class InputDisplay {
     void clearHistory() {
         historyDisplay.clearHistory();
     }
-    void setHistory(String text, char ch) {
-        historyDisplay.setHistory(text, ch);
-    }
-    double str2double(String str) throws ParseException {
-        NumberFormat format = NumberFormat.getInstance(Locale.getDefault());
-        Number number = format.parse(str);
-        return number.doubleValue();
-    }
-    String double2str(double d) {
-        //String.format("%" + DECIMAL_SEPARATOR + "6f", d);
-        DecimalFormat decimalFormat = new DecimalFormat("#" + GROUPING_SEPARATOR + "##0" + DECIMAL_SEPARATOR + "000000");
-        return decimalFormat.format(d);
-    }
-    String rightTrim(String text, String trimBy) {
-        int beginIndex = 0;
-        int endIndex = text.length();
-
-        while (text.substring(beginIndex, endIndex).endsWith(trimBy)) {
-            endIndex -= trimBy.length();
-        }
-        return text.substring(beginIndex, endIndex);
-    }
-    String calculateExpression(double n1, double n2, char op) {
-        /* DecimalFormat df = new DecimalFormat();
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-        symbols.setDecimalSeparator(DECIMAL_SEPARATOR);
-        symbols.setGroupingSeparator(GROUPING_SEPARATOR);
-        df.setDecimalFormatSymbols(symbols); */
-        //Number n1 = df.parse(str1);
-        //Number n2 = df.parse(str2);
-        double res = 0.0;
-        switch (op) {
-            case CHAR_PLUS: res = n1 + n2;
-                break;
-            case CHAR_MINUS: res = n1 - n2;
-                break;
-            case CHAR_STAR: res = n1 * n2;
-                break;
-            case CHAR_SLASH: res = n1 / (n2 == 0 ? 1 : n2);
-                break;
-        }
-        return rightTrim(rightTrim(double2str(res), "0"), DECIMAL_SEPARATOR + "");
-    }
-    String calcExpr(String str1, String str2, char op) {
+    void executeOp(char op) {
         try {
-            return calculateExpression(str2double(str1), str2double(str2), op);
-        } catch (Exception e) {
-            return "";
-        }
-    }
-    void executeOp() {
-        try {
-            String res = calcExpr(str1, str2, op);
+            String res = Expression.calcOp(str1, str2, op);
             clearAll();
             setText(res);
         } catch (Exception e) {
@@ -151,8 +108,7 @@ public final class InputDisplay {
     }
     void executeOpPercent() {
         try {
-            double n1 = str2double(str1);
-            String res = calculateExpression(n1, n1 * str2double(str2) / 100.0, op);
+            String res = Expression.calcOp(str1, Expression.calcOp(str1, Expression.calcOp(str2, "100", CHAR_SLASH), CHAR_STAR), op);
             clearAll();
             setText(res);
         } catch (Exception e) {
@@ -160,27 +116,21 @@ public final class InputDisplay {
             clearHistory();
         }
     }
-    void setOp(char ch) {
+    void setOp(char nOp) {
         if (getLastChar() == CHAR_COMMA)
             cutLastCh();
+        historyDisplay.setHistory(str1, str2, op, nOp);
         if (isNotEmpty(str2)) {
-            setHistory(
-                (op == CHAR_PLUS || op == CHAR_MINUS) &&
-                (ch == CHAR_STAR || ch == CHAR_SLASH) ?
-                "(" + historyDisplay.getHistory() + " " + op + " " + str2 + ")" :
-                historyDisplay.getHistory() + " " + op + " " + str2, ch);
-            if (ch == CHAR_PERCENT) {
+            if (nOp == CHAR_PERCENT) {
                 executeOpPercent();
                 op = CHAR_EQUAL;
             } else {
-                executeOp();
-                op = ch;
+                if (op != CHAR_EQUAL)
+                    executeOp(op);
+                op = nOp;
             }
         } else {
-            if (isNotEmpty(str1)) {
-                op = ch;
-                setHistory(str1, ch);
-            }
+            op = nOp;
         }
     }
     void setOp(Key key) {

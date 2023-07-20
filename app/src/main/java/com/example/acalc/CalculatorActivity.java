@@ -62,10 +62,7 @@ public class CalculatorActivity extends AppCompatActivity {
     public String getInputDisplayText() {
         return inputDisplay.getText().toString();
     }
-    public void setInputDisplayText(String text) {
-        if (inputDisplay.getText().toString().length() < 20)
-            inputDisplay.setText(text);
-    }
+    public void setInputDisplayText(String text) { inputDisplay.setText(text); }
     public void setHistoryDisplayText(String text) {
         historyDisplay.setText(text);
     }
